@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>StelloraCareers - Assessment</title>
+<script src="//instant.page/5.2.0/instantpage.js" type="module"></script>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700&display=swap" rel="stylesheet">
+<style>body{font-family:'Plus Jakarta Sans',sans-serif;background: #F5F3FF}.slider::-webkit-slider-thumb{appearance:none;width:20px;height:20px;border-radius:50%;background:#2563eb;border:3px solid white;box-shadow:0 2px 6px rgba(0,0,0,0.2);cursor:pointer}.slider{appearance:none;height:6px;border-radius:999px;background:#E2E8F0}.star.active{color:#F59E0B}</style>
+</head>
+<body>
+<header style="background:#EDE9FF; border-bottom:1px solid #E9E2FF; position:sticky; top:0; z-index:100; width:100%;">
+  <div style="max-width:100%; width:100%; margin:0 auto; padding:14px 20px 12px 20px; box-sizing:border-box; display:flex; flex-direction:column; gap:10px;">
+    <a href="index.html" style="display:flex; align-items:center; gap:12px; text-decoration:none;">
+      <img src="logo.png" alt="Stellora" style="height:52px; width:auto; display:block; border-radius:12px; background:transparent;">
+      <span style="font-weight:800; font-size:20px; color:#0F172A; letter-spacing:-0.5px;">StelloraCareers</span>
+    </a>
+    <nav style="display:flex; gap:22px; align-items:center; padding-left:4px;">
+      <a href="index.html" style="color:#2D1B4D; text-decoration:none; font-weight:500; font-size:15px;">Home</a>
+      <a href="assessment.html" style="color:#7C5CFC; text-decoration:none; font-weight:700; font-size:15px; border-bottom:2px solid #7C5CFC; padding-bottom:2px;">Assessment</a>
+      <a href="careers.html" style="color:#2D1B4D; text-decoration:none; font-weight:500; font-size:15px;">Careers</a>
+      <a href="compare.html" style="color:#2D1B4D; text-decoration:none; font-weight:500; font-size:15px;">Compare</a>
+    </nav>
+  </div>
+</header>
+<main class="max-w-4xl mx-auto px-4 py-8">
+<div id="step1" class="step bg-white rounded-2xl p-6 md:p-8 shadow-sm">
+<h2 class="text-2xl font-bold mb-2">Step 1: What do you love doing?</h2><p class="text-slate-500 mb-6">Select all that excite you. Choose at least 3.</p>
+<div id="interestsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3"></div>
+<div class="flex justify-end mt-8"><button onclick="nextStep(2)" class="bg-blue-600 text-white px-8 py-3 rounded-full font-semibold">Next →</button></div>
+</div>
+<div id="step2" class="step hidden bg-white rounded-2xl p-6 md:p-8 shadow-sm">
+<h2 class="text-2xl font-bold mb-2">Step 2: Work Style</h2><p class="text-slate-500 mb-6">Rate how much you prefer each (0 = Not at all, 5 = Very much)</p><div id="slidersContainer" class="space-y-6"></div>
+<div class="flex justify-between mt-8"><button onclick="prevStep(1)" class="px-6 py-3 rounded-full border font-semibold">Back</button><button onclick="nextStep(3)" class="bg-blue-600 text-white px-8 py-3 rounded-full font-semibold">Next →</button></div>
+</div>
+<div id="step3" class="step hidden bg-white rounded-2xl p-6 md:p-8 shadow-sm">
+<h2 class="text-2xl font-bold mb-2">Step 3: This or That</h2><p class="text-slate-500 mb-6">For each pair, choose the one you prefer more.</p><div id="orPairsContainer" class="space-y-4"></div>
+<div class="flex justify-between mt-8"><button onclick="prevStep(2)" class="px-6 py-3 rounded-full border font-semibold">Back</button><button onclick="nextStep(4)" class="bg-blue-600 text-white px-8 py-3 rounded-full font-semibold">Next →</button></div>
+</div>
+<div id="step4" class="step hidden bg-white rounded-2xl p-6 md:p-8 shadow-sm">
+<h2 class="text-2xl font-bold mb-6">Step 4: Values & Motivations</h2><p class="text-slate-500 mb-6">Rate how important each value is to you.</p><div id="starContainer" class="space-y-4"></div>
+<div class="flex justify-between mt-8"><button onclick="prevStep(3)" class="px-6 py-3 rounded-full border font-semibold">Back</button><button onclick="nextStep(5)" class="bg-blue-600 text-white px-8 py-3 rounded-full font-semibold">Next →</button></div>
+</div>
+<div id="step5" class="step hidden bg-white rounded-2xl p-6 md:p-8 shadow-sm">
+<h2 class="text-2xl font-bold mb-6">Step 5: Strength Assessment</h2><p class="text-slate-500 mb-6">Select the skills that best describe your strengths.</p><div id="visualGrid" class="grid grid-cols-1 md:grid-cols-3 gap-3"></div>
+<div class="flex justify-between mt-8"><button onclick="prevStep(4)" class="px-6 py-3 rounded-full border font-semibold">Back</button><button onclick="showResults()" class="bg-[#0f172a] text-white px-8 py-3 rounded-full font-semibold">See My Results →</button></div>
+</div>
+<div id="step6" class="step hidden"><div class="bg-white rounded-2xl p-6 md:p-8 shadow-sm">
+<h2 class="text-3xl font-bold">Your Stellora Result</h2><p class="text-slate-500 mt-2 mb-8">Based on your answers across 5 steps, here's your personalized career profile.</p>
+<div class="grid md:grid-cols-3 gap-4 mb-8">
+<div class="bg-blue-50 rounded-2xl p-5 border border-blue-100"><div class="text-xs uppercase text-blue-600 font-bold mb-1">Top Interest</div><div id="resultTop1" class="text-xl font-bold">-</div><div id="resultTop1Desc" class="text-sm text-slate-500 mt-1"></div></div>
+<div class="bg-violet-50 rounded-2xl p-5 border border-violet-100"><div class="text-xs uppercase text-violet-600 font-bold mb-1">Work Style</div><div id="resultWorkStyle" class="text-xl font-bold">-</div><div id="resultWorkStyleDesc" class="text-sm text-slate-500 mt-1"></div></div>
+<div class="bg-amber-50 rounded-2xl p-5 border border-amber-100"><div class="text-xs uppercase text-amber-600 font-bold mb-1">Personality Fit</div><div id="resultPersonality" class="text-xl font-bold">-</div><div id="resultPersonalityDesc" class="text-sm text-slate-500 mt-1"></div></div>
+</div>
+<div class="grid md:grid-cols-2 gap-6 mb-8">
+<div class="border rounded-2xl p-5"><h3 class="font-bold mb-4">Interest Breakdown</h3><div id="interestBreakdown" class="space-y-3"></div></div>
+<div class="border rounded-2xl p-5"><h3 class="font-bold mb-4">Your Strength Areas</h3><div id="strengthList" class="space-y-2"></div><h3 class="font-bold mt-6 mb-3">This or That - Your Lean</h3><div id="orLean" class="flex flex-wrap gap-2"></div></div>
+</div>
+<div class="bg-[#0f172a] rounded-2xl p-6 md:p-8 text-white flex flex-col md:flex-row justify-between items-center gap-4"><div><h3 class="text-xl font-bold">Ready to explore careers matched to you?</h3><p class="text-slate-300 text-sm mt-1"></p></div><button onclick="goToCareers()" class="bg-white text-[#0f172a] px-8 py-3 rounded-full font-bold">Explore Matching Careers →</button></div>
+<div class="flex justify-start mt-6"><button onclick="prevStep(5)" class="px-6 py-2 rounded-full border text-sm">← Back</button></div>
+</div></div>
+</main>
+<script>
+const interests30 = [
+"Building robots and machines",
+"Coding and creating apps",
+"Fixing computers and networks",
+"Working with electronics",
+"Solving technical problems",
+"Managing a business",
+"Marketing products and services",
+"Managing money and investments",
+"Selling and negotiating",
+"Starting new ventures",
+"Helping patients recover",
+"Understanding the human body",
+"Counseling and supporting people",
+"Improving people's lives",
+"Caring for animals",
+"Conducting experiments",
+"Lab research",
+"Discovering how things work",
+"Environmental conservation",
+"Space and scientific exploration",
+"Designing graphics and brands",
+"Photography and videography",
+"Writing stories and content",
+"Music and performance",
+"Fashion and product design",
+"Teaching and mentoring",
+"Public speaking",
+"Law and justice",
+"Protecting communities",
+"Travel and tourism"
+];
+const workStyles = [
+"Working independently",
+"Working with teams",
+"Making important decisions",
+"Leading others",
+"Working with people",
+"Working with data and numbers",
+"Solving complex problems",
+"Generating creative ideas",
+"Working outdoors",
+"Following a structured routine",
+"Taking responsibility",
+"Learning new things continuously"
+];
+const orPairs = [
+{left:"Helping people solve problems",right:"Building technical solutions",lTag:"People Focus",rTag:"Technology Focus"},
+{left:"Creating original ideas",right:"Analyzing facts and information",lTag:"Creativity",rTag:"Analytical Thinking"},
+{left:"Leading teams",right:"Becoming a specialist",lTag:"Leadership",rTag:"Expertise"},
+{left:"Teaching and mentoring",right:"Running a business",lTag:"Education",rTag:"Entrepreneurship"},
+{left:"Improving health and wellbeing",right:"Developing new technologies",lTag:"Healthcare",rTag:"Innovation"},
+{left:"Investigating problems deeply",right:"Taking action quickly",lTag:"Research",rTag:"Action"},
+{left:"Serving communities",right:"Growing businesses",lTag:"Public Service",rTag:"Business Growth"},
+{left:"Stable career path",right:"Flexible independent work",lTag:"Stability",rTag:"Freedom"},
+{left:"Solving mathematical problems",right:"Expressing ideas through writing",lTag:"Mathematics",rTag:"Communication"},
+{left:"Building things in the real world",right:"Creating digital products",lTag:"Physical Creation",rTag:"Digital Creation"},
+{left:"Working with nature",right:"Working with technology",lTag:"Nature",rTag:"Technology"},
+{left:"Researching new discoveries",right:"Managing projects and people",lTag:"Research",rTag:"Management"}
+];
+const starItems = [
+"High salary",
+"Job security",
+"Work-life balance",
+"Helping others",
+"Creativity",
+"Leadership opportunities",
+"Flexibility and freedom",
+"Continuous learning",
+"Travel opportunities",
+"Social impact",
+"Recognition and prestige",
+"Entrepreneurship",
+"Innovation and technology",
+"Working with people",
+"Independence"
+];
+const visualItems = [
+"Problem solving",
+"Communication",
+"Creativity",
+"Leadership",
+"Mathematics",
+"Technology skills",
+"Research skills",
+"Organization",
+"Empathy",
+"Decision making",
+"Attention to detail",
+"Teamwork",
+"Critical thinking",
+"Adaptability",
+"Time management"
+];
+let state={interests:new Set(),workStyle:{},orChoices:{},stars:{},visual:new Set()};
+const ig=document.getElementById('interestsGrid');interests30.forEach(it=>{const d=document.createElement('div');d.className='border rounded-xl px-4 py-3 text-sm cursor-pointer hover:border-blue-400 flex gap-2';d.innerHTML=`<input type="checkbox"><span>${it}</span>`;d.onclick=()=>{const cb=d.querySelector('input');cb.checked=!cb.checked;if(cb.checked){state.interests.add(it);d.classList.add('bg-blue-50','border-blue-500')}else{state.interests.delete(it);d.classList.remove('bg-blue-50','border-blue-500')}};ig.appendChild(d);});
+const sc=document.getElementById('slidersContainer');workStyles.forEach((ws,i)=>{state.workStyle[i]=3;const r=document.createElement('div');r.innerHTML=`<div class="flex justify-between mb-2"><span class="font-medium text-sm">${ws}</span><span class="text-blue-600 font-bold text-sm" id="val-${i}">3 / 5</span></div><input type="range" min="0" max="5" value="3" step="1" class="slider w-full" oninput="updateSlider(${i},this.value)">`;sc.appendChild(r);});
+function updateSlider(i,v){state.workStyle[i]=parseInt(v);document.getElementById(`val-${i}`).innerText=`${v} / 5`;}
+const orc=document.getElementById('orPairsContainer');orPairs.forEach((p,i)=>{const d=document.createElement('div');d.className='border rounded-xl p-4';d.innerHTML=`<div class="flex flex-col md:flex-row gap-3 items-center"><label class="flex-1 w-full cursor-pointer border rounded-xl px-4 py-3 has-[input:checked]:bg-blue-50 has-[input:checked]:border-blue-500 flex gap-2"><input type="radio" name="or-${i}" value="left" onchange="state.orChoices[${i}]='left'"><div><div class="font-semibold text-sm">${p.left}</div><div class="text-xs text-slate-500">${p.lTag}</div></div></label><span class="font-bold text-slate-400">OR</span><label class="flex-1 w-full cursor-pointer border rounded-xl px-4 py-3 has-[input:checked]:bg-violet-50 has-[input:checked]:border-violet-500 flex gap-2"><input type="radio" name="or-${i}" value="right" onchange="state.orChoices[${i}]='right'"><div><div class="font-semibold text-sm">${p.right}</div><div class="text-xs text-slate-500">${p.rTag}</div></div></label></div>`;orc.appendChild(d);});
+const starC=document.getElementById('starContainer');starItems.forEach((item,i)=>{state.stars[i]=0;const r=document.createElement('div');r.className='flex flex-col md:flex-row md:items-center justify-between gap-2 border-b pb-3';r.innerHTML=`<span class="text-sm w-56">${item}</span><div class="flex gap-1" id="stars-${i}">${[1,2,3,4,5].map(s=>`<button onclick="setStars(${i},${s})" class="star text-xl text-slate-200">★</button>`).join('')}</div>`;starC.appendChild(r);});
+function setStars(i,s){state.stars[i]=s;const c=document.getElementById(`stars-${i}`);[...c.children].forEach((el,idx)=>{el.classList.toggle('active',idx<s);el.classList.toggle('text-slate-200',idx>=s);});}
+const vg=document.getElementById('visualGrid');visualItems.forEach(it=>{const d=document.createElement('div');d.className='border rounded-xl px-4 py-3 text-sm cursor-pointer hover:border-blue-400';d.innerText=it;d.onclick=()=>{if(state.visual.has(it)){state.visual.delete(it);d.classList.remove('bg-blue-600','text-white','border-blue-600')}else{state.visual.add(it);d.classList.add('bg-blue-600','text-white','border-blue-600')}};vg.appendChild(d);});
+function nextStep(n){document.querySelectorAll('.step').forEach(s=>s.classList.add('hidden'));document.getElementById('step'+n).classList.remove('hidden');document.getElementById('stepIndicator').innerText=`Step ${n} of 6`;document.getElementById('progressBar').style.width=(n/6*100)+'%';window.scrollTo(0,0);}
+function prevStep(n){nextStep(n);}
+function showResults(){
+const allSelected=[...state.interests,...state.visual];const counts={};allSelected.forEach(v=>{let k='Other';if(/robot|machine|computer|coding|app|data|electrical|mechanical|technical|electronics|technology/i.test(v))k='Tech & Engineering';else if(/patient|human body|counseling|helping|health|wellbeing|animals|empathy/i.test(v))k='Healthcare & Helping';else if(/teach|mentor|public speaking/i.test(v))k='Education';else if(/graphic|photo|video|writing|music|fashion|creative|communication|design|problem solving|creativity/i.test(v))k='Creative & Media';else if(/business|manage|money|market|sell|venture|entrepreneur|leadership|decision|business growth|salary|security|balance/i.test(v))k='Business & Management';else if(/law|justice|protect|communities|public service/i.test(v))k='Law & Public Safety';else if(/experiment|lab|discover|environment|space|research|nature|mathematics/i.test(v))k='Science & Research';else if(/travel|tourism/i.test(v))k='Hospitality & Transport';else if(/organization|decision making|detail|teamwork|critical|adaptability|time management/i.test(v))k='Professional Strengths';counts[k]=(counts[k]||0)+1;});
+const sorted=Object.entries(counts).sort((a,b)=>b[1]-a[1]);const top=sorted[0]||['Tech & Engineering',1];
+document.getElementById('resultTop1').innerText=top[0];document.getElementById('resultTop1Desc').innerText=`${top[1]} selections - your dominant interest`;
+const avgWS=Object.values(state.workStyle).reduce((a,b)=>a+b,0)/Object.values(state.workStyle).length;
+let wsLabel=avgWS>3.5?'High Drive & Leadership':avgWS>2.5?'Balanced & Collaborative':'Calm & Structured';
+document.getElementById('resultWorkStyle').innerText=wsLabel;document.getElementById('resultWorkStyleDesc').innerText=`Average ${avgWS.toFixed(1)} / 5`;
+const leftCount=Object.values(state.orChoices).filter(v=>v==='left').length;const rightCount=Object.values(state.orChoices).filter(v=>v==='right').length;
+document.getElementById('resultPersonality').innerText=leftCount>rightCount?'People & Purpose Driven':'Systems & Innovation Driven';document.getElementById('resultPersonalityDesc').innerText=`${leftCount} vs ${rightCount} choices`;
+document.getElementById('interestBreakdown').innerHTML=sorted.map(([k,v])=>`<div class="flex justify-between items-center"><span class="text-sm">${k}</span><div class="flex items-center gap-2"><div class="w-20 h-2 bg-slate-100 rounded-full overflow-hidden"><div class="h-full bg-blue-600" style="width:${v/Math.max(...sorted.map(s=>s[1]))*100}%"></div></div><span class="text-sm font-bold">${v}</span></div></div>`).join('')||'<p class="text-sm text-slate-400">Select interests</p>';
+const starsSorted=Object.entries(state.stars).sort((a,b)=>b[1]-a[1]).slice(0,5);
+document.getElementById('strengthList').innerHTML=starsSorted.map(([idx,score])=>`<div class="flex justify-between bg-slate-50 rounded-lg px-3 py-2"><span class="text-sm">${starItems[idx]}</span><span class="text-sm font-bold text-amber-500">${'★'.repeat(score)} ${score}/5</span></div>`).join('')||'<p class="text-sm text-slate-400">Rate values</p>';
+document.getElementById('orLean').innerHTML=orPairs.map((p,i)=>{const c=state.orChoices[i];if(!c)return'';return`<span class="text-xs px-3 py-1 rounded-full ${c==='left'?'bg-blue-100 text-blue-700':'bg-violet-100 text-violet-700'}">${c==='left'?p.lTag:p.rTag}</span>`;}).join('')||'<span class="text-sm text-slate-400">Make choices</span>';
+localStorage.setItem('StelloraResult',JSON.stringify({counts:counts,workStyle:state.workStyle,orChoices:state.orChoices,stars:state.stars,top:top[0],topInterest:top[0],interest:top[0],category:top[0],topCategory:top[0],scores:counts}));
+nextStep(6);
+}
+function goToCareers(){window.location.href='result.html';}
+</script>
+</body>
+</html>
