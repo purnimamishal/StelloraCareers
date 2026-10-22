@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head><title>My Admin</title></head>
+<body style="text-align:center; font-family:sans-serif; padding-top:100px;">
+  <h1>Secret Admin - Stellora</h1>
+  <h2>👥 Total Visitors: <span id="count">Loading...</span></h2>
+  <p id="debug" style="color:gray;"></p>
+  <script>
+    fetch('https://abacus.jasoncameron.dev/get/purnimamishal-stellora-private123')
+      .then(r => r.json())
+      .then(d => {
+        document.getElementById('count').innerText = d.value;
+      })
+      .catch(err => {
+        document.getElementById('count').innerText = 'Failed - Refresh page';
+        document.getElementById('debug').innerText = err;
+      });
+  </script>
+</body>
+</html>
